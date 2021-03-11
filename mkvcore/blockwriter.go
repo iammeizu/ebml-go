@@ -18,6 +18,7 @@ import (
 	"errors"
 	"io"
 	"sync"
+	"time"
 
 	"github.com/at-wat/ebml-go"
 )
@@ -40,13 +41,20 @@ type frame struct {
 }
 
 func (w *blockWriter) Write(keyframe bool, timestamp int64, b []byte) (int, error) {
-	w.f <- &frame{
+	// 增加超时时间，防止一直阻塞
+	t := time.NewTimer(4 * time.Second)
+
+	select {
+	case <-t.C:
+		return -1, nil
+	case w.f <- &frame{
 		trackNumber: w.trackNumber,
 		keyframe:    keyframe,
 		timestamp:   timestamp,
 		b:           b,
+	}:
+		return len(b), nil
 	}
-	return len(b), nil
 }
 
 func (w *blockWriter) Close() error {
