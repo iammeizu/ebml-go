@@ -17,6 +17,7 @@ package mkvcore
 import (
 	"errors"
 	"io"
+	"log"
 	"sync"
 	"time"
 
@@ -43,9 +44,10 @@ type frame struct {
 func (w *blockWriter) Write(keyframe bool, timestamp int64, b []byte) (int, error) {
 	// 增加超时时间，防止一直阻塞
 	t := time.NewTimer(4 * time.Second)
-
+	log.Println("enter write")
 	select {
 	case <-t.C:
+		log.Println("timeout")
 		return -1, nil
 	case w.f <- &frame{
 		trackNumber: w.trackNumber,
@@ -53,6 +55,7 @@ func (w *blockWriter) Write(keyframe bool, timestamp int64, b []byte) (int, erro
 		timestamp:   timestamp,
 		b:           b,
 	}:
+		log.Println("write succ")
 		return len(b), nil
 	}
 }
