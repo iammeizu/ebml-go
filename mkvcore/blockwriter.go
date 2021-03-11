@@ -21,7 +21,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/at-wat/ebml-go"
+	"github.com/iammeizu/ebml-go"
 )
 
 // ErrIgnoreOldFrame means that a frame has too old timestamp and ignored.
@@ -174,6 +174,7 @@ func NewSimpleBlockWriter(w0 io.WriteCloser, tracks []TrackDescription, opts ...
 
 		defer func() {
 			// Finalize WebM
+			log.Println("enter defer")
 			if tc0 == invalidTimestamp {
 				// No data written
 				tc0 = 0
@@ -191,6 +192,7 @@ func NewSimpleBlockWriter(w0 io.WriteCloser, tracks []TrackDescription, opts ...
 					options.onFatal(err)
 				}
 			}
+			log.Println("before w close")
 			w.Close()
 			<-fin // read one data to release blocked Close()
 		}()
@@ -199,8 +201,10 @@ func NewSimpleBlockWriter(w0 io.WriteCloser, tracks []TrackDescription, opts ...
 		for {
 			select {
 			case <-closed:
+				log.Println("enter closed")
 				break L_WRITE
 			case f := <-ch:
+				log.Println("enter case ch")
 				if tc0 == invalidTimestamp {
 					tc0 = f.timestamp
 				}
@@ -208,6 +212,7 @@ func NewSimpleBlockWriter(w0 io.WriteCloser, tracks []TrackDescription, opts ...
 				tc := f.timestamp - tc1
 				if tc1 == invalidTimestamp || tc >= 0x7FFF || (f.trackNumber == options.mainTrackNumber && tc >= tNextCluster && f.keyframe) {
 					// Create new Cluster
+					log.Println("enter new cluster")
 					tc1 = f.timestamp
 					tc = 0
 
@@ -247,6 +252,7 @@ func NewSimpleBlockWriter(w0 io.WriteCloser, tracks []TrackDescription, opts ...
 				}
 				// Write SimpleBlock to the file
 				if err := ebml.Marshal(&b, w, options.marshalOpts...); err != nil {
+					log.Println("enter marshal")
 					if options.onFatal != nil {
 						options.onFatal(err)
 					}
