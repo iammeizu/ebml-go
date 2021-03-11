@@ -1,3 +1,3 @@
-module github.com/at-wat/ebml-go
+module github.com/iammeizu/ebml-go
 
 go 1.11

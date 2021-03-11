@@ -20,8 +20,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/at-wat/ebml-go"
-	"github.com/at-wat/ebml-go/webm"
+	"github.com/iammeizu/ebml-go"
+	"github.com/iammeizu/ebml-go/webm"
 )
 
 func TestMarshal_RoundtripWebM(t *testing.T) {

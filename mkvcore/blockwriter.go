@@ -21,7 +21,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/at-wat/ebml-go"
+	"github.com/iammeizu/ebml-go"
 )
 
 // ErrIgnoreOldFrame means that a frame has too old timestamp and ignored.

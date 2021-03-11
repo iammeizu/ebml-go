@@ -18,7 +18,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/at-wat/ebml-go/mkvcore"
+	"github.com/iammeizu/ebml-go/mkvcore"
 )
 
 // NewSimpleBlockWriter creates BlockWriteCloser for each track specified as tracks argument.
@@ -59,7 +59,7 @@ func NewSimpleWriter(w0 io.WriteCloser, tracks []TrackEntry, opts ...mkvcore.Blo
 	os.Stderr.WriteString(
 		"Deprecated: You are using deprecated webm.NewSimpleWriter and *webm.blockWriter.\n" +
 			"            Use webm.NewSimpleBlockWriter and webm.BlockWriteCloser interface instead.\n" +
-			"            See https://godoc.org/github.com/at-wat/ebml-go to find out the latest API.\n",
+			"            See https://godoc.org/github.com/iammeizu/ebml-go to find out the latest API.\n",
 	)
 	ws, err := NewSimpleBlockWriter(w0, tracks, opts...)
 	var ws2 []*FrameWriter

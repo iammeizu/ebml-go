@@ -22,9 +22,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/at-wat/ebml-go"
-	"github.com/at-wat/ebml-go/internal/buffercloser"
-	"github.com/at-wat/ebml-go/internal/errs"
+	"github.com/iammeizu/ebml-go"
+	"github.com/iammeizu/ebml-go/internal/buffercloser"
+	"github.com/iammeizu/ebml-go/internal/errs"
 )
 
 func TestBlockWriter(t *testing.T) {
