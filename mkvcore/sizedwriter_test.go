@@ -17,7 +17,7 @@ package mkvcore
 import (
 	"testing"
 
-	"github.com/at-wat/ebml-go/internal/buffercloser"
+	"github.com/iammeizu/ebml-go/internal/buffercloser"
 )
 
 func TestWriterWithSizeCount(t *testing.T) {

@@ -20,7 +20,7 @@ package webm
 import (
 	"time"
 
-	"github.com/at-wat/ebml-go"
+	"github.com/iammeizu/ebml-go"
 )
 
 // EBMLHeader represents EBML header struct.

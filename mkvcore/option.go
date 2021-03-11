@@ -17,7 +17,7 @@ package mkvcore
 import (
 	"errors"
 
-	"github.com/at-wat/ebml-go"
+	"github.com/iammeizu/ebml-go"
 )
 
 // ErrInvalidTrackNumber means that a track number is invalid. The track number must be larger than 0.
